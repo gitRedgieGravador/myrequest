@@ -59,6 +59,8 @@ export default {
         .then((resp) => {
           if (resp.data.status){
             this.$router.push("/protected")
+          }else{
+            alert(resp.data.sms)
           }
         })
         .catch(err => console.log(err));
