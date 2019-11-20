@@ -49,44 +49,39 @@ router.delete('/deleteuser', function(req, res) {
 })
 
 router.post('/login', function(req, res) {
-    // var usernamei = req.body.username
-    // var passwordi = req.body.password
-    // User.findOne({ username: usernamei }, function(err, data) {
-    //     if (err) {
-    //         return res.send(err)
-    //     }
-    //     if (data != null) {
-    //         var match = bcrypt.compareSync(passwordi, data.password)
-    //         if (match) {
-    //             var acc_token = jwt.sign({ data }, "token1234", { expiresIn: "12h" })
-    //             return res.send({
-    //                 status: true,
-    //                 auth: true,
-    //                 user: data,
-    //                 token: acc_token
-    //             })
-    //         } else {
-    //             return res.send({
-    //                 status: false,
-    //                 auth: false,
-    //                 sms: "Incorrect Password!!"
-    //             })
-    //         }
-    //     }
+    var usernamei = req.body.username
+    var passwordi = req.body.password
+    User.findOne({ username: usernamei }, function(err, data) {
+        if (err) {
+            return res.send(err)
+        }
+        if (data != null) {
+            var match = bcrypt.compareSync(passwordi, data.password)
+            if (match) {
+                var acc_token = jwt.sign({ data }, "token1234", { expiresIn: "12h" })
+                return res.send({
+                    status: true,
+                    auth: true,
+                    user: data,
+                    token: acc_token,
+                    sms: "success"
+                })
+            } else {
+                return res.send({
+                    status: false,
+                    auth: false,
+                    sms: "Incorrect Password!!",
+                    token: null,
+                    user: null
+                })
+            }
+        }
         
-    //     return res.send({
-    //         status: false,
-    //         auth: false,
-    //         sms: "Username Not Found!!"
-    //     })
-    // })
-    var acc_token = jwt.sign({ user: req.body }, "token1234", { expiresIn: "12h" })
-    return res.send({
-        status: true,
-        auth: true,
-        user: req.body,
-        token: acc_token
+        return res.send({
+            status: false,
+            auth: false,
+            sms: "Username Not Found!!"
+        })
     })
-
 })
 module.exports = router;

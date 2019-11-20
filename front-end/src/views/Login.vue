@@ -4,27 +4,44 @@
     <div class="logindiv"></div>
     <center>
       <div id="login-card">
-        <v-card class="transparent" elevation="10" width="500" height="420" >
+        <v-card class="transparent" elevation="10" width="500" height="420">
           <div class="pad-top">
-          <img src="@/assets/pnlogo.png" id="logo"/>
-          <p>Passerelles Numeriques</p>
+            <img src="@/assets/pnlogo.png" id="logo">
+            <p>Passerelles Numeriques</p>
           </div>
-          <div class="custom">
-            <v-text-field append-icon="mdi-account" outlined label="Username" v-model="username" color="black"/>
-            <v-text-field @click:append="showpass = !showpass" :type="showpass ? 'text' : 'password'" :append-icon="showpass ? 'mdi-eye' : 'mdi-eye-off'" outlined label="Password" v-model="password" color="black"/>
-          </div>
-          <div class="transparent pl-6 pr-6">
-            <v-btn class="border"  text block height="70" color="primary" v-on:click="login"><h1 class="font">LOGIN</h1></v-btn>
-          </div>    
+          <form @submit.prevent="login">
+            <div class="custom">
+              <v-text-field
+                append-icon="mdi-account"
+                outlined
+                label="Username"
+                v-model="username"
+                color="black"
+              />
+              <v-text-field
+                @click:append="showpass = !showpass"
+                :type="showpass ? 'text' : 'password'"
+                :append-icon="showpass ? 'mdi-eye' : 'mdi-eye-off'"
+                outlined
+                label="Password"
+                v-model="password"
+                color="black"
+              />
+            </div>
+            <div class="transparent pl-6 pr-6">
+              <v-btn type="submit" class="border" text block height="70" color="primary">
+                <h1 class="font">LOGIN</h1>
+              </v-btn>
+            </div>
+          </form>
         </v-card>
       </div>
     </center>
-    <p>fsdfdskfj</p>
   </div>
 </template>
 <script>
 /* eslint-disable */
-import axios from 'axios'
+import axios from "axios";
 export default {
   name: "login",
   data() {
@@ -35,26 +52,16 @@ export default {
     };
   },
   methods: {
-    adduser() {
-      localStorage.setItem("username", this.username);
-    },
-    getuser() {
-      var name = localStorage.getItem("username");
-      alert(name);
-    }
-  },
-  computed: {
-    user() {
-      return this.$store.state.username;
-    }
-  },
-  methods:{
-    login(){
-      let body = {username: this.username, password: this.password}
-      let url = "http://localhost:3232/login"
-      axios.post(url, body).then(resp => {
-        alert(resp.data)
-      })
+    login() {
+      let body = { username: this.username, password: this.password };
+      this.$store
+        .dispatch("login", body)
+        .then((resp) => {
+          if (resp.data.status){
+            this.$router.push("/protected")
+          }
+        })
+        .catch(err => console.log(err));
     }
   }
 };
@@ -81,32 +88,29 @@ export default {
   transform: translate(50%, 50%);
 }
 .transparent {
-  background-color: white !important;
+  background-color: transparent !important;
   /* opacity: 0.99; */
   border-color: transparent !important;
 }
 .font {
-    font-family:fantasy;
-    font-size: 50px;
-    color: transparent;
-    -webkit-text-stroke-width: 2px;
-    -webkit-text-stroke-color: white;
-    letter-spacing: 30px;
+  font-family: fantasy;
+  font-size: 50px;
+  color: transparent;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: white;
+  letter-spacing: 30px;
 }
 .border {
-    border: solid 1px black;
-}
-#logo {
-  height:70px;
-  width: 70px;
-  border-radius:50%;
   border: solid 1px black;
 }
-.lg-input {
-  color:white !important;
+#logo {
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
+  border: solid 1px black;
 }
 .pad-top {
-  position:relative;
-  padding-top:5%;
+  position: relative;
+  padding-top: 5%;
 }
 </style>
