@@ -4,11 +4,14 @@
     <div class="logindiv"></div>
     <center>
       <div id="login-card">
-        <v-card class="transparent" elevation="10" width="500" height="400" >
+        <v-card class="transparent" elevation="10" width="500" height="420" >
+          <div class="pad-top">
           <img src="@/assets/pnlogo.png" id="logo"/>
+          <p>Passerelles Numeriques</p>
+          </div>
           <div class="custom">
-            <v-text-field class="lg-input" append-icon="mdi-account" outlined label="Username" v-model="username" color="black"/>
-            <v-text-field class="lg-input" @click:append="showpass = !showpass" :type="showpass ? 'text' : 'password'" :append-icon="showpass ? 'mdi-eye' : 'mdi-eye-off'" outlined label="Password" v-model="password" color="black"/>
+            <v-text-field append-icon="mdi-account" outlined label="Username" v-model="username" color="black"/>
+            <v-text-field @click:append="showpass = !showpass" :type="showpass ? 'text' : 'password'" :append-icon="showpass ? 'mdi-eye' : 'mdi-eye-off'" outlined label="Password" v-model="password" color="black"/>
           </div>
           <div class="transparent pl-6 pr-6">
             <v-btn class="border"  text block height="70" color="primary" v-on:click="login"><h1 class="font">LOGIN</h1></v-btn>
@@ -16,10 +19,12 @@
         </v-card>
       </div>
     </center>
+    <p>fsdfdskfj</p>
   </div>
 </template>
 <script>
 /* eslint-disable */
+import axios from 'axios'
 export default {
   name: "login",
   data() {
@@ -41,6 +46,15 @@ export default {
   computed: {
     user() {
       return this.$store.state.username;
+    }
+  },
+  methods:{
+    login(){
+      let body = {username: this.username, password: this.password}
+      let url = "http://localhost:3232/login"
+      axios.post(url, body).then(resp => {
+        alert(resp.data)
+      })
     }
   }
 };
@@ -91,8 +105,8 @@ export default {
 .lg-input {
   color:white !important;
 }
-::placeholder {
-  color: red;
+.pad-top {
+  position:relative;
+  padding-top:5%;
 }
-
 </style>
