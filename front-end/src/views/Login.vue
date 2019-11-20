@@ -4,10 +4,11 @@
     <div class="logindiv"></div>
     <center>
       <div id="login-card">
-        <v-card class="transparent" elevation="10" width="500" height="300">
+        <v-card class="transparent" elevation="10" width="500" height="400" >
+          <img src="@/assets/pnlogo.png" id="logo"/>
           <div class="custom">
-            <v-text-field append-icon="mdi-account" outlined label="Username" v-model="username" color="black"/>
-            <v-text-field  @click:append="showpass = !showpass" :type="showpass ? 'text' : 'password'" :append-icon="showpass ? 'mdi-eye' : 'mdi-eye-off'" outlined label="Password" v-model="password" color="black"/>
+            <v-text-field class="lg-input" append-icon="mdi-account" outlined label="Username" v-model="username" color="black"/>
+            <v-text-field class="lg-input" @click:append="showpass = !showpass" :type="showpass ? 'text' : 'password'" :append-icon="showpass ? 'mdi-eye' : 'mdi-eye-off'" outlined label="Password" v-model="password" color="black"/>
           </div>
           <div class="transparent pl-6 pr-6">
             <v-btn class="border"  text block height="70" color="primary" v-on:click="login"><h1 class="font">LOGIN</h1></v-btn>
@@ -56,9 +57,9 @@ export default {
   height: 100%;
   text-align: center;
   height: 100%;
-  background: url("../assets/sunset.png");
+  background: url("../assets/minimal1.png");
   background-size: cover;
-  opacity: 0.7;
+  opacity: 0.8;
 }
 #login-card {
   position: relative;
@@ -67,19 +68,31 @@ export default {
 }
 .transparent {
   background-color: white !important;
-  opacity: 0.9;
+  /* opacity: 0.99; */
   border-color: transparent !important;
-  border: solid 1px black;
 }
 .font {
     font-family:fantasy;
     font-size: 50px;
     color: transparent;
-    -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: black;
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: white;
     letter-spacing: 30px;
 }
 .border {
     border: solid 1px black;
 }
+#logo {
+  height:70px;
+  width: 70px;
+  border-radius:50%;
+  border: solid 1px black;
+}
+.lg-input {
+  color:white !important;
+}
+::placeholder {
+  color: red;
+}
+
 </style>

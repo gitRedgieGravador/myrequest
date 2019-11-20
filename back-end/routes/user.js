@@ -55,29 +55,30 @@ router.post('/login', function(req, res) {
         if (err) {
             return res.send(err)
         }
-        if (data == null) {
-            return res.send({
-                status: false,
-                auth: false,
-                sms: "Username Not Found!!"
-            })
+        if (data != null) {
+            var match = bcrypt.compareSync(passwordi, data.password)
+            if (match) {
+                var acc_token = jwt.sign({ data }, "token1234", { expiresIn: "12h" })
+                return res.send({
+                    status: true,
+                    auth: true,
+                    user: data,
+                    token: acc_token
+                })
+            } else {
+                return res.send({
+                    status: false,
+                    auth: false,
+                    sms: "Incorrect Password!!"
+                })
+            }
         }
-        var match = bcrypt.compareSync(passwordi, data.password)
-        if (match) {
-            var acc_token = jwt.sign({ data }, "token1234", { expiresIn: "12h" })
-            return res.send({
-                status: true,
-                auth: true,
-                user: data,
-                token: acc_token
-            })
-        } else {
-            return res.send({
-                status: false,
-                auth: false,
-                sms: "Incorrect Password!!"
-            })
-        }
+        
+        return res.send({
+            status: false,
+            auth: false,
+            sms: "Username Not Found!!"
+        })
     })
 
 })
