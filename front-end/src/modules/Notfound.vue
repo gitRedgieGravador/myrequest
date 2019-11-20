@@ -3,7 +3,9 @@
     <div v-if="notfound">
       <div class="overlay">
         <center>
+          <h1 class="errortext">ERROR</h1>
           <p class="st404">404</p>
+          <h1 class="pagenotfound">Page Not Found</h1>
         </center>
       </div>
     </div>
@@ -46,4 +48,22 @@ export default {
     color: white;
     text-decoration: underline;
 }
+.errortext {
+  position: relative;
+  padding-top: 10%;
+  width: 30%;
+  height: 30%;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  color: white;
+}
+.pagenotfound {
+  position: relative;
+  margin-top: -5%;
+  font-size: 50px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  color: white;
+}
+
 </style>

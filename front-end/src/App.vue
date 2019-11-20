@@ -1,6 +1,9 @@
 <template>
   <v-app>
     <v-app-bar app color="primary" dark>
+      
+        <h1>PN Request Management System</h1>
+      
       <v-spacer></v-spacer>
       <span v-if="isLoggedIn">
         <v-btn text @click="logout">
@@ -16,12 +19,6 @@
           <v-icon>mdi-login</v-icon>
         </b>
         <span class="mr-2">Sign In</span>
-      </v-btn>
-      <v-btn text>
-        <b>
-          <v-icon>mdi-account-plus</v-icon>
-        </b>
-        <span class="mr-2">Sign Up</span>
       </v-btn>
       </span>
     </v-app-bar>
