@@ -2,7 +2,7 @@
   <div>
     <center>
       <h1>Sample for socket</h1>
-      <h1> hi {{this.sample}}</h1>
+      <h1>hi {{this.sample}}</h1>
     </center>
   </div>
 </template>
@@ -17,17 +17,18 @@ export default {
       sample: "yes"
     };
   },
-  created(){
-      this.onSample()
+  created() {
+    this.onSample();
   },
   methods: {
-    onSample(){
-        var event;
-        socket.on('sample', function(data){
-            alert(data)
-            event = data
-        })
-        console.log("out event = ", event)
+    passdata(data) {
+      this.sample = data;
+    },
+    onSample() {
+      var event;
+      socket.on("sample", data => {
+        this.passdata(data);
+      });
     }
   }
 };
