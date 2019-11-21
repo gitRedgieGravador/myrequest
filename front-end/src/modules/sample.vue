@@ -25,7 +25,6 @@ export default {
       this.sample = data;
     },
     onSample() {
-      var event;
       socket.on("sample", data => {
         this.passdata(data);
       });
