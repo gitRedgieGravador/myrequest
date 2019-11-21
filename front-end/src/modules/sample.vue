@@ -1,34 +1,33 @@
 <template>
   <div>
     <center>
-      <h1>Protected</h1>
-      <input type="text" v-model="username">
-      <v-btn @click="send">sample</v-btn>
+      <h1>Sample for socket</h1>
+      <h1> hi {{this.sample}}</h1>
     </center>
   </div>
 </template>
 <script>
+/* eslint-disable */
 import io from "socket.io-client";
 var socket = io.connect("http://localhost:3232");
 export default {
   name: "protected",
   data() {
     return {
-      sample: "sample",
-      username:"redgie"
+      sample: "yes"
     };
   },
   created(){
       this.onSample()
   },
   methods: {
-    send() {
-      socket.emit("sample", this.username)
-    },
     onSample(){
+        var event;
         socket.on('sample', function(data){
             alert(data)
+            event = data
         })
+        console.log("out event = ", event)
     }
   }
 };
