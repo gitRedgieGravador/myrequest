@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const userRoute = require('./routes/user')
-var mandrill = require('node-mandrill')('c3d911e4-578e-4933-ab89-97b6de339be9');
+//var mandrill = require('node-mandrill')('c3d911e4-578e-4933-ab89-97b6de339be9');
 //var connect = require('./setup')
 var cors = require('cors')
 
