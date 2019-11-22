@@ -1,17 +1,19 @@
 const express = require('express');
 const app = express();
 const userRoute = require('./routes/user')
-var mandrill = require('node-mandrill')('c3d911e4-578e-4933-ab89-97b6de339be9');
-//var connect = require('./setup')
+const requestRoute = require('./routes/request')
+//var mandrill = require('node-mandrill')('c3d911e4-578e-4933-ab89-97b6de339be9');
+var connect = require('./setup')
 var cors = require('cors')
 
 app.use(cors())
 
 app.use(userRoute)
+app.use(requestRoute)
 var port = 3232
 const server = app.listen(port, function() {
     console.log('Node server listening on port ', port);
-    // connect
+    connect
 });
 const io = require("socket.io")(server);
 
