@@ -59,7 +59,7 @@ export default {
 }
 .pagenotfound {
   position: relative;
-  margin-top: -5%;
+  margin-top: -3%;
   font-size: 50px;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
