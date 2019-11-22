@@ -50,6 +50,9 @@ export default {
     redirect(fullpath){
       this.$router.push({path: fullpath})
     }
+  },
+  created(){
+    this.$router.push({name:'form'})
   }
 };
 </script>

@@ -6,6 +6,8 @@ import Protected from "@/modules/protected.vue";
 import store from '@/store/index'
 import Notfound from '../modules/Notfound.vue'
 import Sockets from '../modules/sample.vue'
+import Form from '../modules/Form.vue'
+
 Vue.use(VueRouter);
 /* eslint-disable */
 const routes = [{
@@ -28,6 +30,21 @@ const routes = [{
     {
         path: '/socket',
         component: Sockets
+    },
+    {
+        path: "/protected",
+        component: Protected,
+        meta: {
+            requiresAuth: true
+        }
+    },
+    {
+        path: '/form',
+        name: 'form',
+        component: Form,
+        // meta: {
+        //     requiresAuth: true
+        // }
     },
     {
         path: '*',
