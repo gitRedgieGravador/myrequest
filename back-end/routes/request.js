@@ -9,88 +9,71 @@ router.use(bodyParser.urlencoded({ extended: false }));
 router.use(bodyParser.json());
 
 
-router.post('/addRequest', function(req, res) {
+router.post('/addRequest', (req, res) => {
     var user = new Request(req.body)
-    user.save(function(err,resp) {
-        if (err) {
-            return res.send("error on saving!!")
-        } else {
-            return res.send({
-                sms: "Successfully Saved",
-                user: resp
-            })
-        }
+    user.save((err, data) => {
+        if (err) return res.send("error on saving!!");
+        return res.send({ message: "Successfully Saved", data });
     })
 })
 
-router.get('/getRequest', function(req, res) {
-    Request.findOne({}, function(err, data) {
-        if (err) {
-            return res.send(err)
-        }
-        if (data == null) {
-            return res.send({ sms: "Username Not Found", user: data })
-        } else {
-            return res.send({ sms: "Success", user: data })
-        }
+router.get('/getRequest', (req, res) => {
+    Request.findOne({}, (err, data) => {
+        if (err) return res.send(err);
+        return res.send({ message: "Success", data })
     })
 })
 
-router.delete('/deleteuser', function(req, res) {
-    User.remove({}, function(err, resp) {
-        if (err) {
-            return res.send(err)
-        } else {
-            return res.send(resp)
+router.post('/updateRequest/:id', (req, res) => {
+    Request.findByIdAndUpdate(req.params.id, { status: req.body.status }, (err, data) => {
+        if (err) return res.send(err);
+        return res.send({ message: "Successfully updated!", data })
+    })
+})
+
+router.post('/deleteRequest/:id', (req, res) => {
+    Request.findByIdAndRemove(req.params.id, (err, data) => {
+        if (err) return res.send(err);
+        return res.send({ message: "Succescfully deleted", data })
+    })
+})
+
+//number of requests rejected
+router.post('/numRejected', (req, res) => {
+    Request.countDocuments({ status: "rejected" }, (err, data) => {
+        if (err) return res.send(err);
+        return res.send({ message: "Success", data })
+    })
+})
+
+//number of requests approved
+router.post('/numApproved', (req, res) => {
+    Request.countDocuments({ status: "approved" }, (err, data) => {
+        if (err) return res.send(err);
+        return res.send({ message: "Success", data })
+    })
+})
+
+//number of requests unread
+router.post('/numUnread', (req, res) => {
+    Request.countDocuments({ status: "unread" }, (err, data) => {
+        if (err) return res.send(err);
+        return res.send({ message: "Success", data })
+    })
+})
+
+//number of request per category
+router.post('/mostRequest', (req, res) => {
+    Request.aggregate([
+        {
+            $group: {
+                _id: '$category', count: {$sum: 1}
+            }
         }
+    ], (err, data) => {
+        if (err) return res.send(err);
+        return res.send({message: "Success", data})
     })
 })
-//fake login
-router.post('/login', function(req, res) {
-    var data = req.body
-    var acc_token = jwt.sign(data , "token1234", { expiresIn: "12h" })
-    res.send({
-        status: true,
-        auth: true,
-        user: data,
-        token: acc_token,
-        sms: "success"
-    })
-})
-// router.post('/login', function(req, res) {
-//     var usernamei = req.body.username
-//     var passwordi = req.body.password
-//     User.findOne({ username: usernamei }, function(err, data) {
-//         if (err) {
-//             return res.send(err)
-//         }
-//         if (data != null) {
-//             var match = bcrypt.compareSync(passwordi, data.password)
-//             if (match) {
-//                 var acc_token = jwt.sign({ data }, "token1234", { expiresIn: "12h" })
-//                 return res.send({
-//                     status: true,
-//                     auth: true,
-//                     user: data,
-//                     token: acc_token,
-//                     sms: "success"
-//                 })
-//             } else {
-//                 return res.send({
-//                     status: false,
-//                     auth: false,
-//                     sms: "Incorrect Password!!",
-//                     token: null,
-//                     user: null
-//                 })
-//             }
-//         }
-        
-//         return res.send({
-//             status: false,
-//             auth: false,
-//             sms: "Username Not Found!!"
-//         })
-//     })
-// })
+
 module.exports = router;
