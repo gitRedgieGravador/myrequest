@@ -1,26 +1,34 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
+//import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
 import Protected from "@/modules/protected.vue";
 import store from '@/store/index'
 import Notfound from '../modules/Notfound.vue'
 import Sockets from '../modules/sample.vue'
+import Educator from '../views/Educator.vue'
 Vue.use(VueRouter);
 /* eslint-disable */
 const routes = [{
         path: "/",
         name: "home",
-        component: Home
-    },
-    {
-        path: "/login",
-        name: "login",
         component: Login
     },
+    // {
+    //     path: "/login",
+    //     name: "login",
+    //     component: Login
+    // },
     {
         path: "/protected",
         component: Protected,
+        meta: {
+            requiresAuth: true
+        }
+    },
+    {
+        path: "/educator",
+        component: Educator,
         meta: {
             requiresAuth: true
         }
@@ -46,7 +54,7 @@ router.beforeEach((to, from, next) => {
         if (store.getters.isLoggedIn) {
             next();
         } else {
-            next({ path: "login" });
+            next({ path: "/" });
         }
     }
     next();

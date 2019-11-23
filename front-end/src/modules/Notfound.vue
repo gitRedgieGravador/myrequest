@@ -41,7 +41,7 @@ export default {
 }
 .st404 {
     position: relative;
-    margin-top: -7%;
+    margin-top: -5%;
     font-size: 200px;
     font-family: Georgia, serif;
     font-weight: bolder;

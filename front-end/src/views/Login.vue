@@ -58,7 +58,7 @@ export default {
         .dispatch("login", body)
         .then((resp) => {
           if (resp.data.status){
-            this.$router.push("/protected")
+            this.$router.push("/educator")
           }else{
             alert(resp.data.sms)
           }
@@ -91,7 +91,6 @@ export default {
 }
 .transparent {
   background-color: transparent !important;
-  /* opacity: 0.99; */
   border-color: transparent !important;
 }
 .font {
