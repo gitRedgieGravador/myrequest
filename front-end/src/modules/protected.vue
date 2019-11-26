@@ -8,8 +8,10 @@
   </div>
 </template>
 <script>
+/* eslint-disable */
 import io from "socket.io-client";
 var socket = io.connect("http://localhost:3232");
+import axios from 'axios'
 export default {
   name: "protected",
   data() {
@@ -22,14 +24,19 @@ export default {
       this.onSample()
   },
   methods: {
-    send() {
-      socket.emit("sample", this.username)
+    // send() {
+    //   socket.emit("sample", this.username)
+    // },
+    send(){
+      axios.post('http://localhost:3232/socket', {username: this.username}).then(resp=>{
+        console.log(resp)
+      })
     },
-    onSample(){
-        socket.on('sample', function(data){
-            alert(data)
-        })
-    }
+    // onSample(){
+    //     socket.on('sample', function(data){
+    //         alert(data)
+    //     })
+    // }
   }
 };
 </script>

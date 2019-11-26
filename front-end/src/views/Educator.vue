@@ -3,18 +3,24 @@
     <v-card :height="ihieght" color="">
       <div class="v-align">
         <h1 >fbdsfdsfj {{ihiegth}}</h1>
+        <v-btn @click="sampleEv">sample</v-btn>
       </div>
     </v-card>
   </div>
 </template>
 <script>
 //import Sidebar from "../components/Sidebar";
+/* eslint-disable */
+import axios from 'axios'
+import io from "socket.io-client";
+var socket = io.connect("http://localhost:3232");
 export default {
   name: "educator",
   data() {
     return {
       name: "",
-      ihieght: 0
+      ihieght: 0,
+      username: "redgie123"
     };
   },
   mounted(){
@@ -29,7 +35,15 @@ export default {
     },
     redirect(fullpath) {
       this.$router.push({ path: fullpath });
-    }
+    },
+    sampleEv(){
+      axios.post('http://localhost:3232/socket', {username: this.username}).then(resp=>{
+        console.log(resp)
+      })
+    },
+    // sampleEv() {
+    //   socket.emit("sample", {username: this.username});
+    // }
   }
 };
 </script>

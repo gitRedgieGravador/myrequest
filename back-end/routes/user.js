@@ -59,6 +59,12 @@ router.post('/login', function(req, res) {
         sms: "success"
     })
 })
+
+router.post('/socket', (req, res)=>{
+    var io = req.app.get('socketio');
+    let data = req.body
+    io.emit('sample', data)
+})
 // router.post('/login', function(req, res) {
 //     var usernamei = req.body.username
 //     var passwordi = req.body.password
