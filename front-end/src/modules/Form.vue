@@ -10,7 +10,7 @@
                   <v-toolbar-title>Fill in the following information</v-toolbar-title>
                   <v-spacer />
                 </v-toolbar>
-                <v-card-text >
+                <v-card-text>
                   <v-form>
                     <!-- <v-text-field label="Login" name="login" prepend-icon="mdi-person" type="text"/>
 
@@ -61,6 +61,35 @@
                       label="Request Title"
                       required
                     ></v-text-field>
+                    <v-dialog
+                      ref="dialog"
+                      v-model="modal"
+                      :return-value.sync="date"
+                      persistent
+                      width="290px"
+                    >
+                      <template v-slot:activator="{ on }">
+                        <v-text-field
+                        
+                          v-model="date"
+                          label="When"
+                          prepend-icon="event"
+                          readonly
+                          v-on="on"
+                          :disabled="disable"
+                        ><v-icon medium>event</v-icon></v-text-field>
+                      </template>
+                      <v-date-picker
+                        v-model="date"
+                        scrollable
+                        :min="currentDate"
+                        @change="selectDate"
+                      >
+                        <v-spacer></v-spacer>
+                        <v-btn text color="primary" @click="modal = false">Cancel</v-btn>
+                        <v-btn text color="primary" @click="$refs.dialog.save(date)">OK</v-btn>
+                      </v-date-picker>
+                    </v-dialog>
                     <br />
                     <v-textarea
                       outlined
@@ -102,6 +131,7 @@ export default {
       selectBatch: null,
       batch: ["2020", "2021", "2022"],
       selectCategory: null,
+      currentDate: new Date().toISOString().substr(0, 10),
       category: [
         "Personal",
         "Whole Batch",
@@ -110,6 +140,29 @@ export default {
       ],
       title: ""
     };
+  },
+  methods: {
+    selectDate() {
+      const list = this.dataHours[0].hoursRequested; //list of date being booked by clients
+      const index = this.services.map(e => e.name).indexOf(this.selectService);
+      const time = this.services[index].time;
+      const date = `${this.date}T00:00:00.000Z`;
+      // console.log(list);
+
+      if (!list.some(item => item.date == date)) {
+        this.dataHours[0].hoursRequested.push({ date: date, minutes: time });
+      } else {
+        const indexDate = list.map(e => e.date).indexOf(date);
+        const totalTime = list[indexDate].minutes + time;
+        if (totalTime > this.dataHours[0].totalHours) {
+          this.alertDisplay();
+          this.date = this.currentDate;
+        } else {
+          list[indexDate].minutes += time;
+        }
+      }
+      // console.log(list);
+    }
   }
 };
 </script>
