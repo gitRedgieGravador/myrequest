@@ -70,14 +70,13 @@
                     >
                       <template v-slot:activator="{ on }">
                         <v-text-field
-                        
                           v-model="date"
-                          label="When"
-                          prepend-icon="event"
+                          label="Date Needed"
+                          prepend-icon="mdi-calendar"
                           readonly
                           v-on="on"
                           :disabled="disable"
-                        ><v-icon medium>event</v-icon></v-text-field>
+                        ></v-text-field>
                       </template>
                       <v-date-picker
                         v-model="date"
