@@ -6,6 +6,7 @@ import Protected from "@/modules/protected.vue";
 import store from '@/store/index'
 import Notfound from '../modules/Notfound.vue'
 import Sockets from '../modules/sample.vue'
+import Requests from '../components/RequestContainer.vue'
 Vue.use(VueRouter);
 /* eslint-disable */
 const routes = [{
@@ -21,6 +22,13 @@ const routes = [{
     {
         path: "/protected",
         component: Protected,
+        meta: {
+            requiresAuth: true
+        }
+    },
+    {
+        path: "/requests",
+        component: Requests,
         meta: {
             requiresAuth: true
         }

@@ -33,7 +33,7 @@ router.post('/getuser', function(req, res) {
         if (data == null) {
             return res.send({ sms: "Username Not Found", user: data })
         } else {
-            return res.send({ sms: "Success", user: data })
+            return res.send({ sms: "Success", user: data, auth: true })
         }
     })
 })
