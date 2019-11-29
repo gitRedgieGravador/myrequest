@@ -7,7 +7,7 @@
       useUnifiedTopology: true
   }, function(err) {
       if (err) {
-          console.log("Can not connect ot mongodb!!")
+          console.log("Can not connect to mongodb!!")
       } else {
           console.log("Connected to: ",mongoDB)
       }

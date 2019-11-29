@@ -31,9 +31,17 @@
                     <v-text-field
                       v-model="name"
                       prepend-icon="mdi-account"
-                      :counter="25"
+                      :counter="15"
                       :rules="nameRules"
-                      label="Full Name"
+                      label="Firstname"
+                      required
+                    ></v-text-field>
+                    <v-text-field
+                      v-model="lastname"
+                      prepend-icon="mdi-account"
+                      :counter="15"
+                      :rules="lastnameRules"
+                      label="Lastname"
                       required
                     ></v-text-field>
 
@@ -92,6 +100,7 @@
                     <br />
                     <v-textarea
                       outlined
+                      v-model="description"
                       name="input-7-4"
                       label="Request Description"
                       value
@@ -101,7 +110,7 @@
                 </v-card-text>
                 <v-card-actions>
                   <v-spacer />
-                  <v-btn color="orange">Submit</v-btn>
+                  <v-btn color="orange" @click="sendRequest">Submit</v-btn>
                 </v-card-actions>
               </v-card>
             </v-col>
@@ -112,15 +121,22 @@
   </div>
 </template>
 <script>
+import axios from 'axios'
 export default {
   name: "form",
   data() {
     return {
+      description: "",
       valid: true,
       name: "",
       nameRules: [
-        v => !!v || "Name is required",
-        v => (v && v.length <= 25) || "Name must be less than 25 characters"
+        v => !!v || "Firstname is required",
+        v => (v && v.length <= 15) || "Name must be less than 15 characters"
+      ],
+      lastname: "",
+      lastnameRules: [
+        v => !!v || "Lastname is required",
+        v => (v && v.length <= 15) || "Name must be less than 15 characters"
       ],
       email: "",
       emailRules: [
@@ -130,6 +146,7 @@ export default {
       selectBatch: null,
       batch: ["2020", "2021", "2022"],
       selectCategory: null,
+      date: null,
       currentDate: new Date().toISOString().substr(0, 10),
       category: [
         "Personal",
@@ -161,6 +178,30 @@ export default {
         }
       }
       // console.log(list);
+    },
+    /* eslint-disable */
+    sendRequest() {
+      let body = {
+        batch: this.selectBatch,
+        category: this.selectCategory,
+        firstname: this.name,
+        lastname: this.lastname,
+        email: this.email,
+        what: this.title,
+        when: this.date,
+        why: this.description,
+        status: "unread",
+        statusDate: new Date(),
+        dateOfSubmit: new Date()
+      };
+      let url = 'http://localhost:3232/addRequest'
+      axios.post(url, body).then(resp=>{
+        console.log(resp)
+      }).catch(err=>{
+        console.log(err)
+      })
+      
+      //console.log(body);
     }
   }
 };
