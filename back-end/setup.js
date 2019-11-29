@@ -4,7 +4,8 @@
   var onlineDb = "mongodb+srv://mrclay:Ymegr@v@dor@gravador-qools.mongodb.net/bigdatadb?retryWrites=true&w=majority"
   mongoose.connect(mongoDB, {
       useNewUrlParser: true,
-      useUnifiedTopology: true
+      useUnifiedTopology: true,
+      useFindAndModify: false
   }, function(err) {
       if (err) {
           console.log("Can not connect ot mongodb!!")

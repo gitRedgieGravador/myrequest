@@ -19,7 +19,7 @@ export function getRequest() {
 }
 
 export function updateRequest(data, id) {
-    return axios.post(`${BASE_URL}/updateRequest/${id}`, { data })
+    return axios.put(`${BASE_URL}/updateRequest/${id}`, { data })
         .then(response => {
             return response.data
         })
@@ -27,7 +27,7 @@ export function updateRequest(data, id) {
 }
 
 export function deleteRequest(id) {
-    return axios.post(`${BASE_URL}/deleteRequest/${id}`)
+    return axios.delete(`${BASE_URL}/deleteRequest/${id}`)
         .then(response => {
             return response.data
         })

@@ -18,20 +18,20 @@ router.post('/addRequest', (req, res) => {
 })
 
 router.get('/getRequest', (req, res) => {
-    Request.findOne({}, (err, data) => {
+    Request.find({}, (err, data) => {
         if (err) return res.send(err);
         return res.send({ message: "Success", data })
     })
 })
 
-router.post('/updateRequest/:id', (req, res) => {
+router.put('/updateRequest/:id', (req, res) => {
     Request.findByIdAndUpdate(req.params.id, { status: req.body.status }, (err, data) => {
         if (err) return res.send(err);
         return res.send({ message: "Successfully updated!", data })
     })
 })
 
-router.post('/deleteRequest/:id', (req, res) => {
+router.delete('/deleteRequest/:id', (req, res) => {
     Request.findByIdAndRemove(req.params.id, (err, data) => {
         if (err) return res.send(err);
         return res.send({ message: "Succescfully deleted", data })
@@ -39,7 +39,7 @@ router.post('/deleteRequest/:id', (req, res) => {
 })
 
 //number of requests rejected
-router.post('/numRejected', (req, res) => {
+router.get('/numRejected', (req, res) => {
     Request.countDocuments({ status: "rejected" }, (err, data) => {
         if (err) return res.send(err);
         return res.send({ message: "Success", data })
@@ -47,7 +47,7 @@ router.post('/numRejected', (req, res) => {
 })
 
 //number of requests approved
-router.post('/numApproved', (req, res) => {
+router.get('/numApproved', (req, res) => {
     Request.countDocuments({ status: "approved" }, (err, data) => {
         if (err) return res.send(err);
         return res.send({ message: "Success", data })
@@ -55,7 +55,7 @@ router.post('/numApproved', (req, res) => {
 })
 
 //number of requests unread
-router.post('/numUnread', (req, res) => {
+router.get('/numUnread', (req, res) => {
     Request.countDocuments({ status: "unread" }, (err, data) => {
         if (err) return res.send(err);
         return res.send({ message: "Success", data })
@@ -63,16 +63,16 @@ router.post('/numUnread', (req, res) => {
 })
 
 //number of request per category
-router.post('/mostRequest', (req, res) => {
-    Request.aggregate([
-        {
-            $group: {
-                _id: '$category', count: {$sum: 1}
-            }
-        }
-    ], (err, data) => {
-        if (err) return res.send(err);
-        return res.send({message: "Success", data})
+router.get('/mostRequest', (req, res) => {
+    
+    Request.aggregate([{ "$sortByCount": "$category"}]).limit(1).then(resp=>{
+        Request.find({category:resp[0]._id}).then(resp=>{
+            res.send(resp)
+        }).catch(err=>{
+            res.send(err)
+        })
+    }).catch(err=>{
+        res.send(err)
     })
 })
 

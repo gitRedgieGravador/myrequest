@@ -12,7 +12,8 @@ const RequestSchema = new Schema({
     when: {type: String, required: true},
     why: {type: String, required: true},
     status: {type: String, required: true},
-    time: {type: String, required: true},
+    statusDate: {type: String, required: true},
+    dateOfSubmit: {type: String, required: true},
 });
 
 var Request = mongoose.model('Request', RequestSchema);
