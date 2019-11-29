@@ -18,13 +18,13 @@ router.post('/addRequest', (req, res) => {
 })
 
 router.get('/getRequest', (req, res) => {
-    Request.findOne({}, (err, data) => {
+    Request.find({}, (err, data) => {
         if (err) return res.send(err);
         return res.send({ message: "Success", data })
     })
 })
 
-router.post('/updateRequest/:id', (req, res) => {
+router.post('/updateStatus/:id', (req, res) => {
     Request.findByIdAndUpdate(req.params.id, { status: req.body.status }, (err, data) => {
         if (err) return res.send(err);
         return res.send({ message: "Successfully updated!", data })
@@ -64,15 +64,14 @@ router.post('/numUnread', (req, res) => {
 
 //number of request per category
 router.post('/mostRequest', (req, res) => {
-    Request.aggregate([
-        {
-            $group: {
-                _id: '$category', count: {$sum: 1}
-            }
+    Request.aggregate([{
+        $group: {
+            _id: '$category',
+            count: { $sum: 1 }
         }
-    ], (err, data) => {
+    }], (err, data) => {
         if (err) return res.send(err);
-        return res.send({message: "Success", data})
+        return res.send({ message: "Success", data })
     })
 })
 
