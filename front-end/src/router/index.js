@@ -7,6 +7,8 @@ import store from '@/store/index'
 import Notfound from '../modules/Notfound.vue'
 import Sockets from '../modules/sample.vue'
 import Form from '../modules/Form.vue'
+import AllRequest from '../modules/AllRequest.vue'
+
 
 Vue.use(VueRouter);
 /* eslint-disable */
@@ -42,6 +44,14 @@ const routes = [{
         path: '/form',
         name: 'form',
         component: Form,
+        // meta: {
+        //     requiresAuth: true
+        // }
+    },
+    {
+        path: '/allrequest',
+        name: 'allrequest',
+        component: AllRequest,
         // meta: {
         //     requiresAuth: true
         // }

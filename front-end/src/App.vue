@@ -52,7 +52,7 @@ export default {
     }
   },
   created(){
-    this.$router.push({name:'form'})
+    this.$router.push({name:'allrequest'})
   }
 };
 </script>

@@ -200,7 +200,15 @@ export default {
       }).catch(err=>{
         console.log(err)
       })
-      
+      this.$v.$reset()
+        this.selectBatch = null
+        this.selectCategory = null
+        this.name = ''
+        this.lastname = ''
+        this.email = ''
+        this.title = ''
+        this.date = ''
+        this.description = ''
       //console.log(body);
     }
   }

@@ -18,6 +18,18 @@ router.post('/addRequest', (req, res) => {
     })
 })
 
+router.get('/getAllRequest', (req, res) => {
+    // var request = new Request(req.body)
+    Request.find({status:{
+        $ne:'approved'
+    }}, (err,data) => {
+        console.log(data);
+        
+        if (err) return res.send(err);
+        return res.send({ message: "Successfully Retrieved!!", data });
+    })
+})
+
 router.get('/getRequest', (req, res) => {
     Request.findOne({}, (err, data) => {
         if (err) return res.send(err);
