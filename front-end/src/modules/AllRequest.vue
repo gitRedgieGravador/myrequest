@@ -87,7 +87,6 @@
                         prepend-icon="mdi-calendar"
                         readonly
                         v-on="on"
-                        :disabled="disable"
                       ></v-text-field>
                     </template>
                     <v-date-picker
@@ -121,7 +120,7 @@
           <!-- <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
-            <v-btn color="blue darken-1" text :disabled="!valid" @click="formAction()">Save</v-btn>
+            <v-btn color="blue darken-1" text @click="formAction()">Save</v-btn>
           </v-card-actions>-->
         </v-card>
       </v-dialog>
@@ -129,7 +128,13 @@
         <v-expansion-panels focusable>
           <v-expansion-panel v-for="(item,i) in list" :key="i">
             <v-expansion-panel-header>{{item.what}}</v-expansion-panel-header>
-            <v-expansion-panel-content>{{item.why}}</v-expansion-panel-content>
+            <v-expansion-panel-content>{{item.why}} 
+            <br><br>
+            Status: 
+            <div class="red lighten-1 text-center">
+            <span class="white--text">{{item.status}}</span>
+            </div>
+            </v-expansion-panel-content>
           </v-expansion-panel>
         </v-expansion-panels>
       </v-card>
