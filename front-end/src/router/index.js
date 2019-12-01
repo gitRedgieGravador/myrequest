@@ -2,7 +2,8 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
-import Protected from "@/modules/protected.vue";
+// import Protected from "@/modules/protected.vue";
+import Request from "@/modules/requests.vue";
 import store from '@/store/index'
 import Notfound from '../modules/Notfound.vue'
 import Sockets from '../modules/sample.vue'
@@ -20,8 +21,8 @@ const routes = [{
         component: Login
     },
     {
-        path: "/protected",
-        component: Protected,
+        path: "/request",
+        component: Request,
         meta: {
             requiresAuth: true
         }
