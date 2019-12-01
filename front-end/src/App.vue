@@ -52,7 +52,9 @@ export default {
     }
   },
   created(){
-    this.$router.push({name:'allrequest'})
+    this.$router.push({name:'allrequest'}).catch(err => {
+      // console.log(err)
+    })
   }
 };
 </script>

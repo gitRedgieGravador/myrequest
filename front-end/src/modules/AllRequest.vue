@@ -89,11 +89,7 @@
                         v-on="on"
                       ></v-text-field>
                     </template>
-                    <v-date-picker
-                      v-model="date"
-                      scrollable
-                      :min="currentDate"
-                    >
+                    <v-date-picker v-model="date" scrollable :min="currentDate">
                       <v-spacer></v-spacer>
                       <v-btn text color="primary" @click="modal = false">Cancel</v-btn>
                       <v-btn text color="primary" @click="$refs.dialog.save(date)">OK</v-btn>
@@ -128,12 +124,13 @@
         <v-expansion-panels focusable>
           <v-expansion-panel v-for="(item,i) in list" :key="i">
             <v-expansion-panel-header>{{item.what}}</v-expansion-panel-header>
-            <v-expansion-panel-content>{{item.why}} 
-            <br><br>
-            Status: 
-            <div class="red lighten-1 text-center">
-            <span class="white--text">{{item.status}}</span>
-            </div>
+            <v-expansion-panel-content>
+              {{item.why}}
+              <br>
+              <br>Status:
+              <div class="red lighten-1 text-center">
+                <span class="white--text">{{item.status}}</span>
+              </div>
             </v-expansion-panel-content>
           </v-expansion-panel>
         </v-expansion-panels>
@@ -145,7 +142,7 @@
 <script>
 import axios from "axios";
 export default {
-  name: "form",
+  name: "allRequest",
   data() {
     return {
       list: [],
@@ -193,7 +190,7 @@ export default {
       .catch(err => console.log(err));
   },
   methods: {
-    sendRequest() {
+    sendRequest(e) {
       let body = {
         batch: this.selectBatch,
         category: this.selectCategory,
@@ -216,6 +213,15 @@ export default {
         .catch(err => {
           console.log(err);
         });
+      this.selectBatch = "";
+      this.selectCategory = "";
+      this.name = "";
+      this.lastname = "";
+      this.email = "";
+      this.title = "";
+      this.date = "";
+      this.description = "";
+      e.preventDefault();
       //console.log(body);
     }
   }
