@@ -10,8 +10,40 @@ export function addRequest(data) {
         .catch(err => Promise.reject(err.message))
 }
 
-export function getRequest() {
-    return axios.post(`${BASE_URL}/getRequest/`)
+export function getRequest(data) {
+    return axios.get(`${BASE_URL}/getRequest/`, { data })
+        .then(response => {
+            return response.data
+        })
+        .catch(err => Promise.reject(err.message));
+}
+
+export function getUnread() {
+    return axios.get(`${BASE_URL}/getUnread/`)
+        .then(response => {
+            return response.data
+        })
+        .catch(err => Promise.reject(err.message));
+}
+
+export function getPending() {
+    return axios.get(`${BASE_URL}/getPending/`)
+        .then(response => {
+            return response.data
+        })
+        .catch(err => Promise.reject(err.message));
+}
+
+export function getApproved() {
+    return axios.get(`${BASE_URL}/getApproved/`)
+        .then(response => {
+            return response.data
+        })
+        .catch(err => Promise.reject(err.message));
+}
+
+export function getRejected() {
+    return axios.get(`${BASE_URL}/getRejected/`)
         .then(response => {
             return response.data
         })
@@ -66,4 +98,3 @@ export function mostRequest() {
         })
         .catch(err => Promise.reject(err.message));
 }
-
