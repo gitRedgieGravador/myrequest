@@ -10,11 +10,8 @@ import rejectedRequest from "@/views/RejectedRequests.vue";
 import store from '@/store/index'
 import Notfound from '../modules/Notfound.vue'
 import Sockets from '../modules/sample.vue'
-<<<<<<< HEAD
-import Requests from '../views/Requests.vue'
-=======
+// import Requests from '../views/Requests.vue'
 // import Requests from '../components/RequestContainer.vue'
->>>>>>> 337cc39d6e684ee4cebe70c56a81dc3cce35c7fd
 Vue.use(VueRouter);
 /* eslint-disable */
 const routes = [{

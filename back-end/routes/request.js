@@ -72,16 +72,12 @@ router.get('/getRejected', (req, res) => {
     })
 })
 
-<<<<<<< HEAD
-router.post('/updateStatus/:id', (req, res) => {
-    Request.findByIdAndUpdate(req.params.id, { status: req.body.status }, (err, data) => {
-=======
+
 router.put('/updateRequest/:id', (req, res) => {
     console.log(req.body.data)
     Request.findByIdAndUpdate(req.params.id, {
         status: req.body.data
     }, (err, data) => {
->>>>>>> 337cc39d6e684ee4cebe70c56a81dc3cce35c7fd
         if (err) return res.send(err);
         return res.send({
             message: "Successfully updated!",
@@ -101,15 +97,11 @@ router.post('/deleteRequest/:id', (req, res) => {
 })
 
 //number of requests rejected
-<<<<<<< HEAD
-router.post('/numRejected', (req, res) => {
-    Request.countDocuments({ status: "rejected" }, (err, data) => {
-=======
+
 router.get('/numRejected', (req, res) => {
     Request.countDocuments({
         status: "rejected"
     }, (err, data) => {
->>>>>>> 337cc39d6e684ee4cebe70c56a81dc3cce35c7fd
         if (err) return res.send(err);
         return res.send({
             message: "Success",
@@ -119,15 +111,11 @@ router.get('/numRejected', (req, res) => {
 })
 
 //number of requests approved
-<<<<<<< HEAD
-router.post('/numApproved', (req, res) => {
-    Request.countDocuments({ status: "approved" }, (err, data) => {
-=======
+
 router.get('/numApproved', (req, res) => {
     Request.countDocuments({
         status: "approved"
     }, (err, data) => {
->>>>>>> 337cc39d6e684ee4cebe70c56a81dc3cce35c7fd
         if (err) return res.send(err);
         return res.send({
             message: "Success",
@@ -137,15 +125,11 @@ router.get('/numApproved', (req, res) => {
 })
 
 //number of requests unread
-<<<<<<< HEAD
-router.post('/numUnread', (req, res) => {
-    Request.countDocuments({ status: "unread" }, (err, data) => {
-=======
+
 router.get('/numUnread', (req, res) => {
     Request.countDocuments({
         status: "unread"
     }, (err, data) => {
->>>>>>> 337cc39d6e684ee4cebe70c56a81dc3cce35c7fd
         if (err) return res.send(err);
         return res.send({
             message: "Success",
@@ -155,10 +139,6 @@ router.get('/numUnread', (req, res) => {
 })
 
 //number of request per category
-<<<<<<< HEAD
-=======
-
->>>>>>> 337cc39d6e684ee4cebe70c56a81dc3cce35c7fd
 router.post('/mostRequest', (req, res) => {
     Request.aggregate([{
         $group: {
@@ -169,9 +149,6 @@ router.post('/mostRequest', (req, res) => {
         }
     }], (err, data) => {
         if (err) return res.send(err);
-<<<<<<< HEAD
-        return res.send({ message: "Success", data })
-=======
         return res.send({
             message: "Success",
             data
@@ -192,7 +169,6 @@ router.post('/mostRequest', (req, res) => {
                 res.send(err)
             })
         })
->>>>>>> 337cc39d6e684ee4cebe70c56a81dc3cce35c7fd
     })
 })
 
