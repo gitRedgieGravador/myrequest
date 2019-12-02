@@ -2,6 +2,7 @@
   <div>
     <center>
       <h1>home</h1>
+      
     </center>
     
   </div>

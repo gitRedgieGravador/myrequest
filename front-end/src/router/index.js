@@ -6,7 +6,7 @@ import Protected from "@/modules/protected.vue";
 import store from '@/store/index'
 import Notfound from '../modules/Notfound.vue'
 import Sockets from '../modules/sample.vue'
-import Requests from '../components/RequestContainer.vue'
+import Requests from '../views/Requests.vue'
 Vue.use(VueRouter);
 /* eslint-disable */
 const routes = [{
