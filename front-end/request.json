@@ -1,0 +1,130 @@
+{
+    "batch": 2021,
+    "category": "School Supplies",
+    "firstname": "Mellyne Grace",
+    "lastname": "Nadela",
+    "email": "mellynegrace@gmail.com",
+    "what": "Notebook",
+    "when": "11/9/2019",
+    "why": "No notebook to use",
+    "status": "reject",
+    "statusDate": "11/6/2019",
+    "dateOfSubmit": "11/2/2019"
+  }
+  {
+    "batch": 2021,
+    "category": "School Supplies",
+    "firstname": "Jakeniel",
+    "lastname": "Erim",
+    "email": "jakeniel@gmail.com",
+    "what": "Bag",
+    "when": "10/6/2019",
+    "why": "I need bag because my old bag has been destroyed",
+    "status": "reject",
+    "statusDate": "10/5/2019",
+    "dateOfSubmit": "10/1/2019"
+  }
+  {
+    "batch": 2021,
+    "category": "School Supplies",
+    "firstname": "Jane",
+    "lastname": "Repollo",
+    "email": "jane@gmail.com",
+    "what": "Pen",
+    "when": "11/6/2019",
+    "why": "No pen to use",
+    "status": "approved",
+    "statusDate": "11/4/2019",
+    "dateOfSubmit": "11/1/2019"
+  }
+  {
+    "batch": 2022,
+    "category": "Personal",
+    "firstname": "Marjory",
+    "lastname": "Mondido",
+    "email": "marjory@gmail.com",
+    "what": "Went to Santo Nino",
+    "when": "11/18/2019",
+    "why": "Attend mass",
+    "status": "reject",
+    "statusDate": "11/15/2019",
+    "dateOfSubmit": "11/7/2019"
+  }
+  {
+    "batch": 2022,
+    "category": "Personal",
+    "firstname": "Mary Mae",
+    "lastname": "Pastidio",
+    "email": "marymae@gmail.com",
+    "what": "Go to Mambaling",
+    "when": "11/30/2019",
+    "why": "To attend Birthday",
+    "status": "approved",
+    "statusDate": "12/27/2019",
+    "dateOfSubmit": "11/25/2019"
+  }
+  {
+    "batch": 2022,
+    "category": "Personal ",
+    "firstname": "Jessa",
+    "lastname": "Ortiz",
+    "email": "jessa@gmail.com",
+    "what": "Bag",
+    "when": "10/10/2019",
+    "why": "I will do to my cousin's house",
+    "status": "approved",
+    "statusDate": "10/5/2019",
+    "dateOfSubmit": "10/1/2019"
+  }
+  {
+    "batch": 2020,
+    "category": "School Supplies",
+    "firstname": "Jason",
+    "lastname": "Mancao",
+    "email": "jason@gmail.com",
+    "what": "Bondpapers",
+    "when": "10/20/2019",
+    "why": "I need to print my project",
+    "status": "unread",
+    "statusDate": "10/11/2019",
+    "dateOfSubmit": "10/11/2019"
+  }
+  {
+    "batch": 2020,
+    "category": "Personal",
+    "firstname": "Jymboy",
+    "lastname": "Epilan",
+    "email": "jimboy@gmail.com",
+    "what": "Folder",
+    "when": "10/10/2019",
+    "why": "I need folder to compile my project",
+    "status": "unread",
+    "statusDate": "10/1/2019",
+    "dateOfSubmit": "10/1/2019"
+  }
+  {
+    "batch": 2020,
+    "category": "Personal",
+    "firstname": "Cris Laurence",
+    "lastname": "Araneta",
+    "email": "crislaurence@gmail.com",
+    "what": "CES",
+    "when": "11/28/2019",
+    "why": "Attend Community Extension Service",
+    "status": "approved",
+    "statusDate": "10/26/2019",
+    "dateOfSubmit": "10/25/2019"
+  }
+  {
+    "batch": 2021,
+    "category": "Personal",
+    "firstname": "Sharmen Claire",
+    "lastname": "Avila",
+    "email": "sharmen@gmail.com",
+    "what": "Went to Grand Mall",
+    "when": "10/29/2019",
+    "why": "I need buy groceries",
+    "status": "unread",
+    "statusDate": "10/27/2019",
+    "dateOfSubmit": "10/27/2019"
+  }

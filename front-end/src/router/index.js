@@ -7,6 +7,7 @@ import store from '@/store/index'
 import Notfound from '../modules/Notfound.vue'
 import Sockets from '../modules/sample.vue'
 import Educator from '../views/Educator.vue'
+import edit from '../views/EditPassword.vue'
 Vue.use(VueRouter);
 /* eslint-disable */
 const routes = [{
@@ -36,6 +37,10 @@ const routes = [{
     {
         path: '/socket',
         component: Sockets
+    },
+    {
+        path: '/editpassword',
+        component: edit
     },
     {
         path: '*',

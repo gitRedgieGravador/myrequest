@@ -4,6 +4,7 @@
       <div class="v-align">
         <h1 >fbdsfdsfj {{ihiegth}}</h1>
         <v-btn @click="sampleEv">sample</v-btn>
+         <v-btn @click="goto('/editPassword')">edit password</v-btn>
       </div>
     </v-card>
   </div>
@@ -13,6 +14,7 @@
 /* eslint-disable */
 import axios from 'axios'
 import io from "socket.io-client";
+import EditPasswordVue from './EditPassword.vue';
 var socket = io.connect("http://localhost:3232");
 export default {
   name: "educator",
@@ -41,6 +43,10 @@ export default {
         console.log(resp)
       })
     },
+   goto(link){
+     this.$router.push({path:EditPassword})
+
+   }
     // sampleEv() {
     //   socket.emit("sample", {username: this.username});
     // }
