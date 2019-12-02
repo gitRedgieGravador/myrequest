@@ -2,11 +2,19 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
-import Protected from "@/modules/protected.vue";
+// import Protected from "@/modules/protected.vue";
+import unreadRequest from "@/views/UnreadRequests.vue";
+import pendingRequest from "@/views/PendingRequests.vue";
+import approvedRequest from "@/views/ApprovedRequests.vue";
+import rejectedRequest from "@/views/RejectedRequests.vue";
 import store from '@/store/index'
 import Notfound from '../modules/Notfound.vue'
 import Sockets from '../modules/sample.vue'
+<<<<<<< HEAD
 import Requests from '../views/Requests.vue'
+=======
+// import Requests from '../components/RequestContainer.vue'
+>>>>>>> 337cc39d6e684ee4cebe70c56a81dc3cce35c7fd
 Vue.use(VueRouter);
 /* eslint-disable */
 const routes = [{
@@ -20,15 +28,29 @@ const routes = [{
         component: Login
     },
     {
-        path: "/protected",
-        component: Protected,
+        path: "/unread-request",
+        component: unreadRequest,
         meta: {
             requiresAuth: true
         }
     },
     {
-        path: "/requests",
-        component: Requests,
+        path: "/pending-request",
+        component: pendingRequest,
+        meta: {
+            requiresAuth: true
+        }
+    },
+    {
+        path: "/approved-request",
+        component: approvedRequest,
+        meta: {
+            requiresAuth: true
+        }
+    },
+    {
+        path: "/rejected-request",
+        component: rejectedRequest,
         meta: {
             requiresAuth: true
         }
