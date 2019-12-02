@@ -23,17 +23,19 @@ router.post('/addRequest', (req, res) => {
 })
 
 // router.get('/getRequest', (req, res) => {
-//     Request.find({}, (err, data) => {
+//     Request.aggregate({ $match: { $gte: "11/01/2019", $lte: "11/30/2019" } }, {
+//         "$sortByCount": "$category"
+//     }, (err, data) => {
 //         if (err) return res.send(err);
 //         return res.send({
 //             message: "Success",
-//             data
+//             datai: data
 //         })
 //     })
 // })
 
 router.get('/getUnread', (req, res) => {
-    Request.find({ status: "unread" }, (err, data) => {
+    Request.find({ status: "unread" }).sort({ when: 1 }).exec((err, data) => {
         if (err) return res.send(err);
         return res.send({
             message: "Success",
@@ -86,6 +88,19 @@ router.put('/updateRequest/:id', (req, res) => {
     })
 })
 
+router.put('/updateWhy/:id', (req, res) => {
+    console.log(req.body.data)
+    Request.findByIdAndUpdate(req.params.id, {
+        why: req.body.data
+    }, (err, data) => {
+        if (err) return res.send(err);
+        return res.send({
+            message: "Successfully updated!",
+            data
+        })
+    })
+})
+
 router.post('/deleteRequest/:id', (req, res) => {
     Request.findByIdAndRemove(req.params.id, (err, data) => {
         if (err) return res.send(err);
@@ -97,7 +112,6 @@ router.post('/deleteRequest/:id', (req, res) => {
 })
 
 //number of requests rejected
-
 router.get('/numRejected', (req, res) => {
     Request.countDocuments({
         status: "rejected"
@@ -111,7 +125,6 @@ router.get('/numRejected', (req, res) => {
 })
 
 //number of requests approved
-
 router.get('/numApproved', (req, res) => {
     Request.countDocuments({
         status: "approved"
@@ -125,7 +138,6 @@ router.get('/numApproved', (req, res) => {
 })
 
 //number of requests unread
-
 router.get('/numUnread', (req, res) => {
     Request.countDocuments({
         status: "unread"

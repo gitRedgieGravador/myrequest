@@ -1,5 +1,5 @@
 <template>
-  <v-expansion-panels focusable>
+  <v-expansion-panels inset focusable>
     <RequestCard
       v-for="(request, index) in requests"
       :request="request"
@@ -11,8 +11,8 @@
 <script>
 import RequestCard from "../components/RequestContainer.vue";
 import { getUnread } from "../actions/requestAxios.js";
-import io from "socket.io-client";
-var socket = io.connect("http://localhost:3232");
+// import io from "socket.io-client";
+// var socket = io.connect("http://localhost:3232");
 export default {
   components: {
     RequestCard
@@ -24,18 +24,7 @@ export default {
       requests: []
     };
   },
-  created() {
-    this.onSample();
-  },
   methods: {
-    send() {
-      socket.emit("sample", this.username);
-    },
-    onSample() {
-      socket.on("sample", function(data) {
-        alert(data);
-      });
-    },
     removeItem(request) {
         this.requests.splice(this.requests.indexOf(request), 1)
       }

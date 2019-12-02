@@ -58,6 +58,15 @@ export function updateRequest(data, id) {
         .catch(err => Promise.reject(err.message));
 }
 
+export function updateWhy(data, id) {
+    return axios.put(`${BASE_URL}/updateWhy/${id}`, { data })
+        .then(response => {
+            return response.data
+        })
+        .catch(err => Promise.reject(err.message));
+}
+
+
 export function deleteRequest(id) {
     return axios.delete(`${BASE_URL}/deleteRequest/${id}`)
         .then(response => {
