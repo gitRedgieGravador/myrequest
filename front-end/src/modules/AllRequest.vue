@@ -2,14 +2,14 @@
   <div id="inspire">
     <div>
       <v-spacer>
-        <br>
-        <br>
+        <br />
+        <br />
       </v-spacer>
       <v-dialog v-model="dialog" max-width="500px">
         <template v-slot:activator="{ on }">
-          <v-btn color="blue darken-1" center right absolute dark class="mb-2" v-on="on">
+          <!-- <v-btn color="blue darken-1" center right absolute dark class="mb-2" v-on="on">
             <v-icon>mdi-plus</v-icon>New Request
-          </v-btn>
+          </v-btn>-->
         </template>
         <v-card>
           <v-card-title class="black--text">
@@ -21,7 +21,7 @@
             <v-container>
               <v-toolbar color="primary" dark flat>
                 <v-toolbar-title>Fill in the following information</v-toolbar-title>
-                <v-spacer/>
+                <v-spacer />
               </v-toolbar>
               <v-card-text>
                 <v-form>
@@ -56,8 +56,8 @@
                     label="E-mail"
                     required
                   ></v-text-field>
-                  <br>
-                  <br>
+                  <br />
+                  <br />
                   <v-select
                     v-model="selectCategory"
                     :items="category"
@@ -65,7 +65,7 @@
                     label="Request Category"
                     required
                   ></v-select>
-                  <br>
+                  <br />
                   <v-text-field
                     v-model="title"
                     :rules="[v => !!v || 'Title is required']"
@@ -95,7 +95,7 @@
                       <v-btn text color="primary" @click="$refs.dialog.save(date)">OK</v-btn>
                     </v-date-picker>
                   </v-dialog>
-                  <br>
+                  <br />
                   <v-textarea
                     outlined
                     v-model="description"
@@ -107,8 +107,8 @@
                 </v-form>
               </v-card-text>
               <v-card-actions>
-                <v-spacer/>
-                <v-btn color="blue darken-1" @click="close = false">Cancel</v-btn>
+                <v-spacer />
+                <v-btn color="blue darken-1" @click="dialog = false">Cancel</v-btn>
                 <v-btn color="orange" @click="sendRequest">Submit</v-btn>
               </v-card-actions>
             </v-container>
@@ -116,20 +116,55 @@
           <!-- <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
-            <v-btn color="blue darken-1" text @click="formAction()">Save</v-btn>
+            <v-btn color="blue darken-1" text :disabled="!valid" @click="formAction()">Save</v-btn>
           </v-card-actions>-->
         </v-card>
       </v-dialog>
+
+      <v-card class="mx-auto" max-width="800">
+        <v-row>
+          <v-col class="text-center">
+            <h1>Requests</h1>
+          </v-col>
+          <v-col>
+            <v-btn
+              color="blue darken-1"
+              center
+              right
+              absolute
+              dark
+              class="mb-2"
+              @click="dialog = true"
+            >
+              <v-icon>mdi-plus</v-icon>New Request
+            </v-btn>
+          </v-col>
+        </v-row>
+        <hr />
+      </v-card>
+
       <v-card class="mx-auto" max-width="800">
         <v-expansion-panels focusable>
           <v-expansion-panel v-for="(item,i) in list" :key="i">
             <v-expansion-panel-header>{{item.what}}</v-expansion-panel-header>
             <v-expansion-panel-content>
               {{item.why}}
-              <br>
-              <br>Status:
-              <div class="red lighten-1 text-center">
-                <span class="white--text">{{item.status}}</span>
+              <br />
+              <br />Status:
+              <div v-if="item.status == 'unread'">
+                <v-card color="green" class="text-center">
+                  <span class="white--text">{{item.status}}</span>
+                </v-card>
+              </div>
+              <div v-if="item.status == 'pending'">
+                <v-card color="orange" class="text-center">
+                  <span class="white--text">{{item.status}}</span>
+                </v-card>
+              </div>
+              <div v-if="item.status == 'rejected'">
+                <v-card color="error" class="text-center">
+                  <span class="white--text">{{item.status}}</span>
+                </v-card>
               </div>
             </v-expansion-panel-content>
           </v-expansion-panel>
@@ -140,14 +175,16 @@
 </template>
 
 <script>
+/* eslint-disable */
 import axios from "axios";
 export default {
-  name: "allRequest",
+  name: "studentform",
   data() {
     return {
       list: [],
       modal: false,
       close: false,
+      // disable: false,
       dialog: false,
       description: "",
       valid: true,
@@ -181,8 +218,9 @@ export default {
     };
   },
   mounted() {
+    console.log("student form");
     // requrst
-    this.$http
+    axios
       .get("http://localhost:3232/getAllRequest")
       .then(res => {
         this.list = res.data.data;
@@ -190,7 +228,7 @@ export default {
       .catch(err => console.log(err));
   },
   methods: {
-    sendRequest(e) {
+    sendRequest() {
       let body = {
         batch: this.selectBatch,
         category: this.selectCategory,
@@ -200,7 +238,7 @@ export default {
         what: this.title,
         when: this.date,
         why: this.description,
-        status: "unread",
+        status: "rejected",
         statusDate: new Date(),
         dateOfSubmit: new Date()
       };
@@ -209,19 +247,11 @@ export default {
         .post(url, body)
         .then(resp => {
           console.log(resp);
+          this.dialog = false;
         })
         .catch(err => {
           console.log(err);
         });
-      this.selectBatch = "";
-      this.selectCategory = "";
-      this.name = "";
-      this.lastname = "";
-      this.email = "";
-      this.title = "";
-      this.date = "";
-      this.description = "";
-      e.preventDefault();
       //console.log(body);
     }
   }
