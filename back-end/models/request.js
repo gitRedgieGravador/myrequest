@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const RequestSchema = new Schema({
-    batch: {type: Number, trim: true, required: true},
+    batch: {type: Number, trim: true},
     category: {type: String, trim: true, required: true},
     firstname: {type: String, required: true},
     lastname: {type: String, required: true},
